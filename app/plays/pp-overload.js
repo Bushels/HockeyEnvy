@@ -1,0 +1,155 @@
+/* Overload power play (LEFT side, +y): P strong-side point, H half-wall, L low/goal line, N net front, W weak-side shooter. */
+PLAYBOOK['pp-overload|pk-box']=[
+  {id:'ovl-box-lowhigh',name:'Low to high',win:'pp',override:{fl:{GL_L:[70,21]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P moves it to H on the half-wall. The whole box slides over to the puck.'},
+    {do:'pass',to:'L',wait:0.7,say:'H puts it down to L. The near box D steps up on L.'},
+    {do:'lag',who:['fl'],f:0.45,wait:0.6,say:'The near box forward drops down to stop L passing back to H. That leaves the point open.'},
+    {do:'pass',to:'P',wait:2.6,say:'L passes up to P. Low to high.'},
+    {do:'shot',res:'save',wait:0.2,say:'The box forward is late getting back out. P shoots low and N is in the goalie’s eyes.'},
+    {do:'rebound',to:'N',wait:0.2,say:'The goalie can’t see it clean. The rebound drops to N.'},
+    {do:'shot',res:'goal',wait:0.2,say:'N shoots it in. Goal.'}]},
+  {id:'ovl-box-swing',name:'Swing to the weak-side shooter',win:'pp',override:{fr:{PT_L:[56,3],WALL_L:[60,5],GL_L:[66,5],PT:[47,1]},dr:{PT_L:[79,2],WALL_L:[79,3],GL_L:[80,2],PT:[79,2],DOT_L:[79,3],DOT_R:[80,1]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The box shifts to the puck.'},
+    {do:'pass',to:'L',wait:0.6,say:'H to L. All four killers lean toward the puck.'},
+    {do:'pass',to:'H',wait:0.6,say:'L back to H. The far box forward keeps drifting over. He can’t see W anymore.'},
+    {do:'pass',to:'P',wait:0.6,say:'H back up to P.'},
+    {do:'carry',to:[35,3],wait:0.2,say:'P walks to the middle of the line. The far box forward comes up to stop him.'},
+    {do:'move',moves:[['W',[65,-21]],['N',[84,-4]]],sync:'W',wait:0.1},
+    {do:'lag',who:['dr','fl'],f:0.35,wait:0},
+    {do:'pass',to:'W',wait:0.1,say:'P swings it to W stepping into the far dot. Even the far box D has leaned over to the puck side.'},
+    {do:'shot',res:'goal',wait:0.05,say:'One-timer before the box can slide back. N screens the goalie. Goal.'}]},
+  {id:'ovl-box-backdoor',name:'Back door',win:'pp',override:{dr:{GL_L:[78,-2],NET:[79,-2],GL_R:[79,-2],BEHIND:[79,-2]},dl:{GL_L:[87,10],NET:[87,10]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H on the half-wall.'},
+    {do:'pass',to:'L',wait:0.7,say:'H to L on the goal line. N pops out in front and the far box D goes with him.'},
+    {do:'move',who:'W',to:[84,-8],sync:'W',wait:0.1,say:'W sneaks in behind everyone to the back post.'},
+    {do:'lag',who:['dl'],f:0.5,wait:0},
+    {do:'carry',to:[80,12],wait:0.1,say:'L walks out from the goal line toward the slot. The near box D is a step behind him.'},
+    {do:'pass',to:'W',wait:0.1,say:'L slides it across the crease to W at the back post.'},
+    {do:'shot',res:'goal',wait:0.05,say:'The goalie can’t get across. Tap-in at the back door.'}]},
+  {id:'ovl-box-close',name:'Box closes the triangle',win:'pk',override:{dl:{CORNER_L:[86,25]},fl:{CORNER_L:[77,31]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The box shifts to the puck but the far box forward stays where he can see W.'},
+    {do:'move',who:'L',to:[88,29],sync:'L',wait:0.2},
+    {do:'pass',to:'L',wait:0.3,say:'H puts it in the corner to L. The near box D closes him from the net side.'},
+    {do:'say',wait:0.8,say:'The near box forward drops to take away the pass back up to H. L has no good option.'},
+    {do:'steal',by:'fl',wait:3.0,say:'L forces it up the wall. The box forward is waiting and picks it off.'},
+    {do:'clear',to:[24,-30],wait:0.3,say:'He fires it to the empty weak side and down the ice. The overload has nobody over there.'}]},
+  {id:'ovl-box-weakside',name:'Far box forward stays connected',win:'pk',override:{fr:{DOT_R:[69,-18]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The box shifts, but the far box forward keeps his eyes on W.'},
+    {do:'pass',to:'L',wait:0.6,say:'H to L. The near box D takes L. The far box D stays on N.'},
+    {do:'pass',to:'H',wait:0.6,say:'Back up to H.'},
+    {do:'pass',to:'P',wait:0.6,say:'H to P.'},
+    {do:'pass',to:'W',wait:0.2,say:'P swings it to W. The far box forward never lost him and attacks the top of the circle.'},
+    {do:'block',by:'fr',wait:0.15,say:'W shoots right into him. Blocked.'},
+    {do:'clear',to:[24,-22],wait:0.3,say:'He chips it out of the zone.'}]}
+];
+PLAYBOOK['pp-overload|pk-box-aggressive']=[
+  {id:'ovl-agg-demo',name:'How it works',win:'demo',override:{fr:{PT:[50,1]},L:{WALL_L:[84,22]}},steps:[
+    {do:'say',wait:0.3,say:'Overload against the aggressive box. This box plays higher and jumps on the puck.'},
+    {do:'pass',to:'H',wait:1.4,say:'P to H. The near box forward and box D both come at H to squeeze him on the wall.'},
+    {do:'pass',to:'L',wait:0.3,say:'H gets it down to L quickly. The near box D has to hurry back to the net.'},
+    {do:'move',who:'H',to:[62,25],wait:0.2},
+    {do:'pass',to:'H',wait:0.7,say:'H steps off the wall into open ice. L gives it right back.'},
+    {do:'pass',to:'P',wait:0.3,say:'H moves it up to P before the box forward can get to him.'},
+    {do:'free',who:'H',wait:0},
+    {do:'carry',to:[35,3],wait:0.1,say:'The near box forward jumps P. P walks to the middle, away from him.'},
+    {do:'pass',to:'W',wait:0.1,say:'P swings it to W. The far box forward and box D close on W fast.'},
+    {do:'say',wait:1.2,say:'Every pass gets pressure. The overload has to move the puck quickly or the box takes it.'}]},
+  {id:'ovl-agg-under',name:'Beat the squeeze down low',win:'pp',override:{dl:{CORNER_L:[76,19],GL_L:[79,18],NET:[79,17]},dr:{GL_L:[84,7],NET:[84,6]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The near box forward and box D jump H to squeeze him on the wall.'},
+    {do:'move',moves:[['L',[82,25]],['N',[77,3]]],sync:'L',wait:0.1,say:'L slides up the wall behind the box D.'},
+    {do:'lag',who:['dl'],f:0.45,wait:0.3},
+    {do:'pass',to:'L',wait:0.1,say:'H chips it down to L before the trap closes. The box D is caught above the puck.'},
+    {do:'carry',to:[82,13],wait:0.2,say:'L walks to the net. Now it is L and N against one box D.'},
+    {do:'pass',to:'N',wait:0.2,say:'The far box D has to take L. L slips it to N in front.'},
+    {do:'shot',res:'goal',wait:0.2,say:'N shoots before anyone can get back. Goal. Beat the squeeze and it’s 2-on-1 down low.'}]},
+  {id:'ovl-agg-swing',name:'Pressure up top, swing it',win:'pp',override:{dr:{PT_L:[81,1],PT:[81,1],GL_L:[81,0],DOT_R:[81,0]},fr:{PT:[50,2]},L:{WALL_L:[84,22]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The near box forward and box D squeeze H.'},
+    {do:'pass',to:'L',wait:0.3,say:'H gets it down to L before the trap closes.'},
+    {do:'move',who:'H',to:[62,25],wait:0.2},
+    {do:'pass',to:'H',wait:0.6,say:'L back to H in the open ice.'},
+    {do:'pass',to:'P',wait:0.3,say:'H up to P. The near box forward sprints out to jump him.'},
+    {do:'free',who:'H',wait:0},
+    {do:'carry',to:[35,3],wait:0.1,say:'P walks away from the pressure to the middle. The far box forward is sagging in the slot.'},
+    {do:'move',moves:[['W',[66,-21]],['N',[84,-4]]],sync:'W',wait:0},
+    {do:'lag',who:['dr','fr'],f:0.25,wait:0},
+    {do:'pass',to:'W',wait:0.05,say:'P zips it across to W stepping into the far dot.'},
+    {do:'shot',res:'goal',wait:0.05,say:'W one-times it with N screening. When one killer jumps, someone else is open.'}]},
+  {id:'ovl-agg-trap',name:'Wall trap on H',win:'pk',override:{dl:{WALL_L:[67,29],DOT_L:[68,28]},fl:{WALL_L:[57,30],DOT_L:[58,30]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H on the half-wall. The near box forward stays above him.'},
+    {do:'carry',to:[61,35],wait:0.2,say:'H carries it down the wall below the top of the circle. That is the trigger.'},
+    {do:'say',wait:0.6,say:'The near box D steps up from below. H is stuck between two killers against the boards.'},
+    {do:'steal',by:'dl',wait:2.8,say:'The box D wins the puck.'},
+    {do:'clear',to:[24,-30],wait:0.3,say:'He fires it out on his forehand, away from the overload’s side.'}]},
+  {id:'ovl-agg-corner',name:'One go, all go in the corner',win:'pk',override:{dl:{CORNER_L:[86,26]},fl:{CORNER_L:[76,31]},dr:{CORNER_L:[86,13]},fr:{CORNER_L:[70,6]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H.'},
+    {do:'move',who:'L',to:[89,31],sync:'L',wait:0.1},
+    {do:'pass',to:'L',wait:0.2,say:'H chips it hard around the boards into the corner. L has to pick it up with his back to the play.'},
+    {do:'say',wait:0.5,say:'All four go at once. Box D on L, box forward up the wall, the other two take the net and the middle.'},
+    {do:'steal',by:'dl',wait:3.4,say:'L has no way out. The box D takes it off him.'},
+    {do:'pass',to:'fl',wait:0.9,say:'He bumps it up the wall to the box forward.'},
+    {do:'clear',to:[24,-30],wait:0.9,say:'Out to the empty side and down the ice. Pressure only works when all four go together.'}]}
+];
+PLAYBOOK['pp-overload|pk-diamond']=[
+  {id:'ovl-dia-twolow',name:'Two low beat one',win:'pp',override:{side_l:{GL_L:[70,17],CORNER_L:[70,20]},low:{GL_L:[87,9]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The near side killer comes out to H.'},
+    {do:'pass',to:'L',wait:0.7,say:'H to L. The side killer stays up high like a diamond, so the low D has to step out to L.'},
+    {do:'lag',who:['side_r','low'],f:0.35,wait:0.2},
+    {do:'move',who:'N',to:[75,7],sync:'N',wait:0.1,say:'N pops out to the slot and is open. The far side killer is too slow to get there.'},
+    {do:'pass',to:'N',wait:0.1,say:'L passes into the slot to N.'},
+    {do:'shot',res:'goal',wait:0.1,say:'Quick shot from the slot. Goal. The low D had to go out to L, so N was open.'}]},
+  {id:'ovl-dia-walk',name:'H walks under the side killer',win:'pp',override:{side_l:{WALL_L:[54,28]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The near side killer comes out high to pressure him.'},
+    {do:'lag',who:['side_l','side_r'],f:0.5,wait:0.2},
+    {do:'move',who:'W',to:[84,-7],wait:0},
+    {do:'carry',to:[66,23],wait:0.1,say:'H steps under his stick and walks down toward the dot. W slides to the back post.'},
+    {do:'shot',res:'save',wait:0.3,until:'W',say:'The low D has to stay with N. H shoots far side. The goalie gets a pad on it.'},
+    {do:'rebound',to:'W',wait:0.1,say:'The rebound kicks out to W at the back post.'},
+    {do:'shot',res:'goal',wait:0.1,say:'W snuck in behind the far side killer. He has an empty side. Goal.'}]},
+  {id:'ovl-dia-box',name:'Diamond turns into a box',win:'pk',override:{top:{GL_L:[75,21]},side_l:{GL_L:[85,12]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The near side killer comes out to H.'},
+    {do:'pass',to:'L',wait:0.7,say:'H to L. Puck below the dots: the diamond becomes a box.'},
+    {do:'say',wait:1.0,say:'Side killer takes L. Low D stays on N. Far side killer guards the back door. Top killer drops to block the pass up.'},
+    {do:'steal',by:'top',wait:3.4,say:'L tries to throw it back up to H. The top killer is in the lane.'},
+    {do:'clear',to:[24,-30],wait:0.3,say:'He clears it to the empty side and out.'}]}
+];
+PLAYBOOK['pp-overload|pk-wedge-plus-one']=[
+  {id:'ovl-wdg-demo',name:'How it works',win:'demo',steps:[
+    {do:'say',wait:0.3,say:'Overload against the wedge + 1. One killer chases the puck up top. Three killers pack the slot.'},
+    {do:'pass',to:'H',wait:1.4,say:'P to H. The +1 chases H. The slot forward and two wedge D stay in front of the net.'},
+    {do:'pass',to:'L',wait:0.7,say:'H to L. The near wedge D takes L. The slot forward drops to the net and the +1 drops to the slot.'},
+    {do:'move',who:'H',to:[62,25],wait:0.2},
+    {do:'pass',to:'H',wait:0.7,say:'L back to H in the open ice. The wedge goes back to its triangle.'},
+    {do:'pass',to:'P',wait:0.3,say:'H up to P. The +1 goes back out to P.'},
+    {do:'free',who:'H',wait:0},
+    {do:'carry',to:[35,3],wait:0.1,say:'P walks to the middle.'},
+    {do:'pass',to:'W',wait:0.1,say:'P swings it to W. The far wedge D steps out to W.'},
+    {do:'say',wait:1.2,say:'The killers move a lot up top, but the slot always stays packed with three killers.'}]},
+  {id:'ovl-wdg-swing',name:'Over-shift, weak-side one-timer',win:'pp',override:{top:{WALL_L:[63,8],PT_L:[61,6],GL_L:[78,7]},press:{GL_L:[68,2]},dr:{PT_L:[81,0],PT:[81,0],WALL_L:[82,0],GL_L:[82,-2],DOT_R:[81,-1]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The +1 chases.'},
+    {do:'pass',to:'L',wait:0.6,say:'H to L. The near wedge D takes L. The +1 drops into the slot.'},
+    {do:'say',wait:0.5,say:'Every killer is leaning to the puck side. The slot forward can’t see W anymore.'},
+    {do:'move',moves:[['W',[68,-21]],['N',[84,-4]]],wait:0},
+    {do:'lag',who:['press','dr','top'],f:0.3,wait:0},
+    {do:'pass',to:'P',wait:2.6,say:'L throws it back up to P. The +1 is stuck down low.'},
+    {do:'pass',to:'W',wait:0.05,say:'P one-touches it across to W at the far dot.'},
+    {do:'shot',res:'goal',wait:0.05,say:'One-timer with N in the goalie’s eyes. Goal.'}]},
+  {id:'ovl-wdg-point',name:'Two on one up top',win:'pp',steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The +1 chases H.'},
+    {do:'pass',to:'L',wait:0.6,say:'H to L. The +1 sinks down with H.'},
+    {do:'move',who:'H',to:[62,25],wait:0.2},
+    {do:'pass',to:'H',wait:0.6,say:'H steps off the wall and L gives it back.'},
+    {do:'lag',who:['press'],f:0.3,wait:0},
+    {do:'pass',to:'P',wait:0.2,say:'H up to P. The +1 is down low with H, so P has time.'},
+    {do:'free',who:'H',wait:0},
+    {do:'shot',res:'save',wait:0.1,say:'P shoots low through N’s screen. The goalie can’t hold it.'},
+    {do:'rebound',to:'N',wait:0.1,say:'The rebound pops out to N.'},
+    {do:'shot',res:'goal',wait:0.05,say:'N jams it in. Shots through traffic make rebounds.'}]},
+  {id:'ovl-wdg-givego',name:'Give-and-go shut down',win:'pk',override:{dl:{GL_L:[80,15]}},steps:[
+    {do:'pass',to:'H',wait:0.6,say:'P to H. The +1 chases H.'},
+    {do:'pass',to:'L',wait:0.6,say:'H to L.'},
+    {do:'move',who:'H',to:[68,19],sync:'H',wait:0.1,say:'H cuts toward the slot looking for the pass back.'},
+    {do:'say',wait:0.5,say:'The near wedge D steps off the post into H’s lane. The slot forward and far wedge D stay on N.'},
+    {do:'steal',by:'dl',wait:2.6,say:'L’s return pass hits the wedge D’s stick.'},
+    {do:'pass',to:'press',wait:0.9,say:'He chips it up to the +1 in the middle.'},
+    {do:'clear',to:[24,-30],wait:0.1,say:'The +1 fires it out to the empty side. The slot stayed packed the whole time.'}]}
+];

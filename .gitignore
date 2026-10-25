@@ -1,0 +1,3 @@
+app/_test*.html
+app/shots*/
+__pycache__/
