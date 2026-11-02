@@ -10,6 +10,10 @@ drag the puck carrier, tap to pass, tap the net to shoot, and drag any player ou
 - Penalty kills: Box (passive), Box (aggressive), Diamond, Wedge + 1 / Triangle + 1
 - 16 matchups, 50 plays, plus a demo for each
 
+## Notion
+
+The [Grok Fleet hub](https://app.notion.com/p/405307b613ed81c085e9c5545238bd6f) is the source of truth for this project.
+
 ## Layout
 | Path | What |
 |---|---|
